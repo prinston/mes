@@ -1,0 +1,9 @@
+{
+  "name": "mes",
+  "version": "1.0.0",
+  "description": "Modular Economy Server",
+  "main": "/server/server.js",
+  "scripts": {},
+  "author": "Prinston",
+  "license": "ISC"
+}
