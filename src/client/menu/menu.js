@@ -1,8 +1,8 @@
 class Menu {
-
   constructor(name) {
     this.name = name;
     this.options = [];
+    this.onback = undefined;
   }
 
   addOption(option) {
@@ -15,10 +15,12 @@ class Menu {
   getOptions() { return this.options }
   removeOption(index) { return this.options.splice(index, 1); }
 
+  setOnBack(onback) { this.onback = onback; }
+  getOnBack() { return this.onback; }
+  removeOnBack() { this.onback = undefined; }
 }
 
 class Option {
-
   constructor(name) {
     this.name = name;
     this.value = undefined;
@@ -35,21 +37,40 @@ class Option {
 
   setOnChange(onchange) { this.onchange = onchange; }
   getOnChange() { return this.onchange; }
-  removeOnChange() { this.onchange = undefined }
-
+  removeOnChange() { this.onchange = undefined; }
 }
 
 class SelectableOption extends Option {
-
   constructor(name) {
     super(name);
-    this.onselect = undefined
+    this.onselect = undefined;
   }
 
   setOnSelect(onselect) { this.onselect = onselect; }
   getOnSelect() { return this.onselect; }
-  removeOnSelect() { this.onselect = undefined }
+  removeOnSelect() { this.onselect = undefined; }
+}
 
+class PromptOption extends Option {
+  constructor(name) {
+    super(name);
+    this.prompt = undefined;
+  }
+
+  setPrompt(prompt) { this.prompt = prompt; }
+  getPrompt() { return this.prompt; }
+  removePrompt() { this.prompt = undefined; }
+}
+
+class SelectablePromptOption extends SelectableOption {
+  constructor(name) {
+    super(name);
+    this.prompt = undefined;
+  }
+
+  setPrompt(prompt) { this.prompt = prompt; }
+  getPrompt() { return this.prompt; }
+  removePrompt() { this.prompt = undefined; }
 }
 
 class SubMenuOption extends Option {
@@ -69,11 +90,9 @@ class SubMenuOption extends Option {
   }
   getOptions() { return this.options }
   removeOption(index) { return this.options.splice(index, 1); }
-
 }
 
 class NumberOption extends SelectableOption {
-
   constructor(name) {
     super(name);
     this.type = 'number';
@@ -84,14 +103,66 @@ class NumberOption extends SelectableOption {
 
   setMin(min) { this.min = min; }
   getMin() { return this.min; }
-  removeMin() { this.min = undefined }
+  removeMin() { this.min = undefined; }
+
+  setMax(max) { this.max = max; }
+  getMax() { return this.max; }
+  removeMax() { this.max = undefined; }
+
+  setStep(step) { this.step = step; }
+  getStep() { return this.step; }
+  removeStep() { this.step = undefined; }
+}
+
+class TextOption extends PromptOption {
+  constructor(name) {
+    super(name);
+    this.type = 'text';
+    this.max = undefined;
+  }
 
   setMax(max) { this.max = max; }
   getMax() { return this.max; }
   removeMax() { this.max = undefined }
+}
 
-  setStep(step) { this.step = step; }
-  getStep() { return this.step; }
-  removeStep() { this.step = undefined }
+class ButtonOption extends SelectableOption {
+  constructor(name) {
+    super(name);
+    this.type = 'button';
+  }
+}
 
+class TextDisplayOption extends SelectablePromptOption {
+  constructor(name) {
+    super(name);
+    this.type = 'textdisplay';
+  }
+}
+
+class ScrollOption extends SelectablePromptOption {
+  constructor(name) {
+    super(name);
+    this.type = 'textdisplay';
+    this.options = [];
+  }
+
+  addOption(text, value = undefined) { this.options.push({ text: text, value: value }); }
+  getOptions() { return this.options; }
+  removeOption(index) { return this.options.splice(index, 1); }
+}
+
+class TitleOption {
+  constructor(title, subtitle) {
+    this.title = title;
+    this.subtitle = subtitle;
+  }
+
+  setTitle(title) { this.title = title; }
+  getTitle() { return this.title; }
+  removeTitle() { this.title = undefined; }
+
+  setSubTitle(subtitle) { this.subtitle = subtitle; }
+  getSubTitle() { return this.subtitle; }
+  removeSubTitle() { this.subtitle = undefined; }
 }
