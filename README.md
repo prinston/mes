@@ -1,1 +1,1 @@
-# mes
+# Modular Economy Server (MES)

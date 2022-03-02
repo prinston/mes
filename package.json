@@ -5,5 +5,8 @@
   "main": "/server/server.js",
   "scripts": {},
   "author": "Prinston",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
 }
